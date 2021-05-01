@@ -37,6 +37,12 @@ cc.Class({
     let _heigh = 50;
     let num = 15;
     for (let x of str) {
+      //是换行符就换行
+      if (x == '\n') {
+        this.m_current_lie = 0;
+        this.m_current_hang++;
+        continue;
+      }
       //1. 创建str 中所有的字符
       let a = this.create_label(x);
       a.position = cc.v2(this.m_current_lie * _width, -this.m_current_hang * _heigh)
