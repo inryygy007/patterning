@@ -25,6 +25,7 @@ cc.Class({
 
   onLoad () {
     this.m_origin = cc.find("origin", this.node);
+    this.m_cursor = cc.find("origin/cursor", this.node);
     this.m_current_hang = 0;//当前行
     this.m_current_lie = 0;//当前列
   },
@@ -37,15 +38,19 @@ cc.Class({
     let _heigh = 50;
     let num = 15;
     for (let x of str) {
+      let post = cc.v2(this.m_current_lie * _width, -this.m_current_hang * _heigh)
       //是换行符就换行
       if (x == '\n') {
         this.m_current_lie = 0;
         this.m_current_hang++;
+        this.m_cursor.position = cc.v2(post.x + 0, post.y - 20);
         continue;
       }
       //1. 创建str 中所有的字符
       let a = this.create_label(x);
-      a.position = cc.v2(this.m_current_lie * _width, -this.m_current_hang * _heigh)
+      a.position = post;
+      //光标位置
+      this.m_cursor.position = cc.v2(post.x + 0, post.y - 20);
       //2. 放在这个脚本依附的node 下的origin结点
       this.m_origin.addChild(a);
       //每输出一个字列+1

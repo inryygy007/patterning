@@ -18,7 +18,7 @@ cc.Class({
     let panel_cp = panel.addComponent("print")
     panel_cp.print('fs\nhs\n\n\n\n');
     panel_cp.print('\n');
-    panel_cp.print('abd');
+    // panel_cp.print('a');
   },
 
   // update (dt) {},
