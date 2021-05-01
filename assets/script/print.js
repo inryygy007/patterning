@@ -25,6 +25,8 @@ cc.Class({
 
   onLoad () {
     this.m_origin = cc.find("origin", this.node);
+    this.m_current_hang = 0;//当前行
+    this.m_current_lie = 0;//当前列
   },
 
   start () {
@@ -34,16 +36,19 @@ cc.Class({
     let _width = 50;
     let _heigh = 50;
     let num = 15;
-    let i = 0;
     for (let x of str) {
       //1. 创建str 中所有的字符
       let a = this.create_label(x);
-      let hang = Math.floor(i / num);
-      let lie = i % num;
-      a.position = cc.v2(lie * _width, -hang * _heigh)
+      a.position = cc.v2(this.m_current_lie * _width, -this.m_current_hang * _heigh)
       //2. 放在这个脚本依附的node 下的origin结点
       this.m_origin.addChild(a);
-      i++;
+      //每输出一个字列+1
+      this.m_current_lie++;
+      //当列的数大于等于最大的列了就换行+1
+      if (this.m_current_lie >= num) {
+        this.m_current_lie = 0;
+        this.m_current_hang++;
+      }
     }
   },
   //创建文本输出
