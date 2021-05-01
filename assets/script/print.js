@@ -71,12 +71,6 @@ cc.Class({
   },
   //光标动画
   cursor_act () {
-    // let act1 = cc.tween(this.m_cursor)
-    //   .hide()
-    //   .start()
-    // let act2 = cc.tween(this.m_cursor)
-    //   .show()
-    //   .start()
     let sequence_act = cc.sequence(cc.hide(), cc.delayTime(0.5), cc.show(), cc.delayTime(0.5));
     this.m_cursor.runAction(cc.repeatForever(sequence_act))
   }
